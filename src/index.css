@@ -2,41 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* ENEM Prep App Design System - Neon Cyberpunk Theme
+All colors MUST be HSL for perfect theming.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Background System */
+    --background: 240 14% 6%;          /* Deep dark blue #0f172a */
+    --background-secondary: 240 13% 12%; /* Secondary dark #1e293b */
+    --background-tertiary: 240 11% 20%; /* Tertiary dark #334155 */
+    --foreground: 0 0% 98%;            /* Almost white text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card System */
+    --card: 240 13% 12%;               /* Dark card background */
+    --card-secondary: 240 11% 20%;     /* Secondary card */
+    --card-foreground: 0 0% 98%;       /* Card text */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Neon Color Palette */
+    --neon-cyan: 191 91% 50%;          /* Bright cyan #0ea5e9 */
+    --neon-cyan-bright: 190 95% 65%;   /* Brighter cyan #38bdf8 */
+    --neon-cyan-dark: 192 82% 30%;     /* Darker cyan #0891b2 */
+    --neon-teal: 184 92% 45%;          /* Teal accent #06b6d4 */
+    --neon-blue: 217 91% 60%;          /* Electric blue #3b82f6 */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Functional Colors */
+    --primary: 191 91% 50%;            /* Neon cyan primary */
+    --primary-foreground: 240 14% 6%;  /* Dark text on primary */
+    --primary-glow: 191 91% 50%;       /* Glow effect */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 11% 20%;          /* Dark secondary */
+    --secondary-foreground: 0 0% 98%;  /* Light text on secondary */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 190 95% 65%;             /* Bright cyan accent */
+    --accent-foreground: 240 14% 6%;   /* Dark text on accent */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 240 10% 25%;              /* Muted background */
+    --muted-foreground: 210 20% 65%;   /* Muted text */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Status Colors */
+    --success: 142 76% 45%;            /* Success green */
+    --success-foreground: 0 0% 98%;    /* Success text */
+    
+    --warning: 45 93% 55%;             /* Warning yellow */
+    --warning-foreground: 240 14% 6%;  /* Warning text */
+    
+    --destructive: 0 84% 60%;          /* Error red */
+    --destructive-foreground: 0 0% 98%; /* Error text */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Interactive Elements */
+    --border: 240 11% 25%;             /* Border color */
+    --input: 240 11% 20%;              /* Input background */
+    --ring: 191 91% 50%;               /* Focus ring */
 
-    --radius: 0.5rem;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(191 91% 50%), hsl(184 92% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(240 13% 12%), hsl(240 11% 20%));
+    --gradient-glow: linear-gradient(135deg, hsl(191 91% 50% / 0.2), hsl(190 95% 65% / 0.1));
+    --gradient-hero: linear-gradient(135deg, hsl(240 14% 6%), hsl(240 13% 12%));
+
+    /* Shadows and Glows */
+    --shadow-glow: 0 0 40px hsl(191 91% 50% / 0.3);
+    --shadow-glow-strong: 0 0 60px hsl(191 91% 50% / 0.5);
+    --shadow-card: 0 10px 30px hsl(240 14% 6% / 0.8);
+    --shadow-elevated: 0 20px 60px hsl(240 14% 6% / 0.9);
+
+    /* Border Radius */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease-in-out;
+    --animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +140,109 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-hero);
+    overflow-x: hidden;
+  }
+
+  /* Neon Glow Effects */
+  .glow-cyan {
+    box-shadow: var(--shadow-glow);
+    transition: var(--transition-glow);
+  }
+
+  .glow-cyan:hover {
+    box-shadow: var(--shadow-glow-strong);
+  }
+
+  /* Pulse Animation for CTAs */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    from {
+      box-shadow: 0 0 20px hsl(191 91% 50% / 0.3);
+    }
+    to {
+      box-shadow: 0 0 40px hsl(191 91% 50% / 0.6);
+    }
+  }
+
+  /* Gradient Text Effect */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    transition: var(--transition-smooth);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Neon Border Effect */
+  .neon-border {
+    border: 1px solid hsl(191 91% 50% / 0.3);
+    position: relative;
+  }
+
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: -1;
+  }
+
+  .neon-border:hover::before {
+    opacity: 0.3;
+  }
+
+  /* Loading Animation */
+  .loading-dots {
+    animation: loading-dots 1.4s infinite;
+  }
+
+  @keyframes loading-dots {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(240 13% 12%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(191 91% 50%);
   }
 }
